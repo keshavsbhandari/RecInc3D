@@ -2,6 +2,9 @@ import torch
 import torch.nn as nn
 from torch.autograd import Variable
 from convlstmcell import ConvLSTMCell
+import os
+
+
 
 class LSTMInCell(nn.Module):
 

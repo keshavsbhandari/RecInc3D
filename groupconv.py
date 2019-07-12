@@ -1,6 +1,8 @@
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
+import os
+
 
 
 class GroupConv(nn.Module):
@@ -9,6 +11,7 @@ class GroupConv(nn.Module):
                  out_channels,
                  kernel_size,
                  stride,
+                 batchnorm = True,
                  *args,
                  **kwargs):
 
@@ -27,10 +30,12 @@ class GroupConv(nn.Module):
 
         self.bnorm = nn.BatchNorm3d(out_channels, affine=True)
 
-        self.groupconv = nn.Sequential(self.conv,
-                                       self.pool,
-                                       self.relu,
-                                       self.bnorm)
+        seq = [self.conv,self.pool,self.relu,self.bnorm]
+
+        # if not batchnorm:
+        #     seq = seq[:-1]
+
+        self.groupconv = nn.Sequential(*seq)
 
     def forward(self, x):
         return self.groupconv(x)

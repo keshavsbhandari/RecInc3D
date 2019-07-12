@@ -1,6 +1,9 @@
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
+import os
+
+
 
 class SelfAttention(nn.Module):
     def __init__(self, in_channels):

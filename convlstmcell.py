@@ -1,6 +1,9 @@
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
+import os
+
+os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,6"
 
 class ConvLSTMCell(nn.Module):
     def __init__(self, input_channels, hidden_channels, kernel_size):
